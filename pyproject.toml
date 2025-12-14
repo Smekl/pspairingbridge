@@ -8,7 +8,7 @@ version = "0.0.1"
 description = "A bridge for PS Remote Play discovery packets over VPNs"
 readme = "README.md"
 authors = [
-  { name = "Your Name", email = "your.email@example.com" },
+  { name = "Smekl", email = "ido098@gmail.com" },
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -24,4 +24,4 @@ dependencies = [
 pspairingbridge = "pspairingbridge.__main__:main"
 
 [project.urls]
-"Homepage" = "https://github.com/yourusername/pspairingbridge"
+"Homepage" = "https://github.com/Smekl/pspairingbridge"
