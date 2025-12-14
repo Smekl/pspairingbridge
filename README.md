@@ -10,24 +10,37 @@ pip install .
 
 ## Usage
 
-You can run the bridge using the command line interface:
+You can run the bridge using the command line interface `pspairingbridge`.
 
-```bash
-# General usage
-pspairingbridge --help
-
-# Example: Run with manual Sony IP and Host ID (skipping discovery)
-pspairingbridge --sony-ip 192.168.50.112 --sony-host-id EC748CB56323 --sony-host-type PS5 --sony-host-name PS5-657 --sony-host-request-port 997 --sony-protocol-version 00030010 --sony-system-version 09600004
-```
-
-Or let it auto-discover if on the same network:
+### Auto-Discovery Mode
+If your machine is on the same broadcast domain as the PS5 (e.g. WiFi), you can simply run:
 
 ```bash
 pspairingbridge
 ```
+You can also specify a network interface to scan on:
+```bash
+pspairingbridge --interface "Ethernet 2"
+```
+
+### Manual Mode (VPN/Remote)
+If you are over a VPN (ZeroTier, Tailscale) and broadcast packets don't reach the PS5, you must manually provide the PS5's IP and Host ID.
+
+```bash
+pspairingbridge --sony-ip <PS5_IP> --sony-host-id <HOST_ID>
+```
+
+**Required Arguments for Manual Mode:**
+*   `--sony-ip`: The IP address of your PS5 (e.g., `192.168.1.50`).
+*   `--sony-host-id`: The unique Host ID of your console.
+
+**Optional Arguments:**
+*   `--sony-host-name`: Name of the console (visual only).
+*   `--sony-host-type`: Type of console (default: `PS5`).
+*   `--sony-host-request-port`: Port (default: `997`).
 
 ## How it Works
 
 1.  Listens for multicast service discovery packets from the PS Remote Play app.
-2.  Proxies the multicast request to the PS5 (unicast).
+2.  Proxies the multicast request to the PS5 (unicast) or uses manually provided details.
 3.  Proxies the PS5's response back to the client.
